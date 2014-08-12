@@ -87,9 +87,7 @@ To setup ARImages behavior
 USAGE
 ------
 
-* Set up the AR Class. Declare the **AR Images** behavior in the ActiveRecord class. The following example describes a case of two image attributes in AR model class, `'<attribute1 name>'` and `'<attribute2 name>'` . The first one have three variants. Management and displaying of this example are shown below.
-
-The code should look something like this:
+* Set up the AR Class. Declare the **AR Images** behavior in the ActiveRecord class. The following example describes a case of two image attributes in AR model class, `'<attribute1 name>'` and `'<attribute2 name>'` . The first one have three variants. Management and displaying of this example are shown below. The code should look something like this:
 
 ```
     use drfairy\yii2-ar-images\ARImages
@@ -169,13 +167,16 @@ If behavior and it's environment setup succeeded, the `<path to images>` would l
 * `/<ROOT_ALIAS_NAME>/<IMAGES_FOLDER>` - from the web in the main application
 * `/assets/<ROOT_ALIAS_NAME link name hash>/<IMAGES_FOLDER>` - from the web in other applications of your Yii2 project
 
-In context of AR class, attaching behavior and images (variations):
+In context of AR class, attaching behavior and images:
 
 * `<path to images>/<AR behavior owner class name without namespaces>/<AR image attribute name>/<image variant><img saved hash name >.<file extension>` - default
--- `<image variant>` is `''` if it's the first variant of ARImage attribute with no name set
--- `<image variant>` is `'<number>/'` if it's the `#<number>` variant of ARImage attribute with no name set
--- `<image variant>` is `'<name>/'` if it's the variant of ARImage attribute with name `<name>`
-* `<path to images>/<saveFolder>/<image variant><img saved hash name >.<file extension> - if <saveFolder>` is set for AR image attribute in attached behavior; `<image variant>` is identical to previous case
+* `<path to images>/<saveFolder>/<image variant><img saved hash name >.<file extension> - if <saveFolder>` is set for AR image attribute in attached behavior;
+
+Image variant context:
+
+* `<image variant>` is `''` if it's the first variant of ARImage attribute with no name set
+* `<image variant>` is `'<number>/'` if it's the `#<number>` variant of ARImage attribute with no name set
+* `<image variant>` is `'<name>/'` if it's the variant of ARImage attribute with name `<name>`
 
 Displaying images in a View for the main example are shown above, so let's use another example of AR images variants url in View part:
 
