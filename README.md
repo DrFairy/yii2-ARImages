@@ -159,24 +159,30 @@ USAGE
     <? } ?>
 ```
 
-## Naming conventions by examples ##
+NAMING CONVENTIONS BY EXAMPLES
+------------------------------
 
-If behavior and it's environment setup succeeded, the `<path to images>` would look like this:
+### Images url scheme ###
+
+If behavior and it's environment setup succeeded, the global images path context (`<path to images>`) would look like this:
 
 * `<project Path>/<application ID>/web/<ROOT_ALIAS_NAME>/<IMAGES_FOLDER>` - in a filesystem
 * `/<ROOT_ALIAS_NAME>/<IMAGES_FOLDER>` - from the web in the main application
 * `/assets/<ROOT_ALIAS_NAME link name hash>/<IMAGES_FOLDER>` - from the web in other applications of your Yii2 project
 
-In context of AR class, attaching behavior and images:
-
-* `<path to images>/<AR behavior owner class name without namespaces>/<AR image attribute name>/<image variant><img saved hash name >.<file extension>` - default
-* `<path to images>/<saveFolder>/<image variant><img saved hash name >.<file extension> - if <saveFolder>` is set for AR image attribute in attached behavior;
-
-Image variant context:
+Image variant context (`<image variant>`):
 
 * `<image variant>` is `''` if it's the first variant of ARImage attribute with no name set
 * `<image variant>` is `'<number>/'` if it's the `#<number>` variant of ARImage attribute with no name set
 * `<image variant>` is `'<name>/'` if it's the variant of ARImage attribute with name `<name>`
+
+All the contexts (two ones above plus contexts of AR class, attaching behavior and images names), fool url scheme:
+
+* `<path to images>/<AR behavior owner class name without namespaces>/<AR image attribute name>/<image variant><img saved hash name >.<file extension>` - default
+* `<path to images>/<saveFolder>/<image variant><img saved hash name >.<file extension> - if <saveFolder>` is set for AR image attribute in attached behavior;
+
+
+### Display ###
 
 Displaying images in a View for the main example are shown above, so let's use another example of AR images variants url in View part:
 
@@ -184,7 +190,8 @@ Displaying images in a View for the main example are shown above, so let's use a
 * `$model->imagesUrls['logo']` - is available as the first image variant url of AR model image attribute 'logo', declared in attached behavior settings. BUT IT'S ONLY AVAILABLE if this first attribute image variant has no name.
 * `$model->imagesUrls['logo2']` - is available as the third image variant url of AR model image attribute 'logo', declared in attached behavior settings. BUT IT'S ONLY AVAILABLE if there is three declared variants, and the third one has no name, else it’s the first name convention case.
 
-## Don't forget ##
+DON'T FORGET
+------------
 
 * To add to you ActiveForm with image attributes file inputs in a View:
 
