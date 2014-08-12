@@ -139,9 +139,7 @@ The code should look something like this:
     }
 ```
 
-* Create/Update. You may use native Yii2 ActiveForm and ActiveField to make the client part of file CU operations of CRUD. The client (View) part is the only one you set in this case.
-
-For the above example just add two standard file inputs in a View in the ActiveForm body:
+* Create/Update. You may use native Yii2 ActiveForm and ActiveField to make the client part of file CU operations of CRUD. The client (View) part is the only one you set in this case. For the above example just add two standard file inputs in a View in the ActiveForm body:
 
 ```
 	<?= $form->field($<model>, '<attribute1 name>')->fileInput() ?>
@@ -174,9 +172,9 @@ If behavior and it's environment setup succeeded, the `<path to images>` would l
 In context of AR class, attaching behavior and images (variations):
 
 * `<path to images>/<AR behavior owner class name without namespaces>/<AR image attribute name>/<image variant><img saved hash name >.<file extension>` - default
-- - `<image variant>` is `''` if it's the first variant of ARImage attribute with no name set
-- - `<image variant>` is `'<number>/'` if it's the `#<number>` variant of ARImage attribute with no name set
-- - `<image variant>` is `'<name>/'` if it's the variant of ARImage attribute with name `<name>`
+-- `<image variant>` is `''` if it's the first variant of ARImage attribute with no name set
+-- `<image variant>` is `'<number>/'` if it's the `#<number>` variant of ARImage attribute with no name set
+-- `<image variant>` is `'<name>/'` if it's the variant of ARImage attribute with name `<name>`
 * `<path to images>/<saveFolder>/<image variant><img saved hash name >.<file extension> - if <saveFolder>` is set for AR image attribute in attached behavior; `<image variant>` is identical to previous case
 
 Displaying images in a View for the main example are shown above, so let's use another example of AR images variants url in View part:
