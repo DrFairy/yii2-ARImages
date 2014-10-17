@@ -12,16 +12,25 @@ Note: This behavior doesn't overwrite or broke native yii2 AR attributes validat
 INSTALLATION
 -------------
 
-The preferred way to install **AR Images** is through [Composer](https://getcomposer.org/). Either add the following to the require section of your `composer.json` file:
+The preferred way to install **AR Images** is through [Composer](https://getcomposer.org/). Add the following to the require section of your `composer.json` file:
 
 ```
 	"DrFairy/yii2-ARImages": "*"
 ```
 
-Or run:
+Add the following to the repositories section of the same file:
 
 ```
-	$ php composer.phar require DrFairy/yii2-ARImages "*"
+	{
+        "type":"git",
+        "url":"http://github.com/DrFairy/yii2-ARImages"
+    }
+```
+
+And run:
+
+```
+	$ php composer.phar install
 ```
 
 Manual installation: [downloading the source in ZIP-format](https://github.com/DrFairy/yii2-ARImages/archive/master.zip).
