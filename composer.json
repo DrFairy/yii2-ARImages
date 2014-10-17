@@ -1,0 +1,23 @@
+{
+    "name": "DrFairy/yii2-ARImages",
+    "description": "This extension allows you to use images attributes (with images' variants) within Yii2 ActiveRecord models",
+    "keywords": ["yii", "extension", "behavior", "active record images attributes"],
+    "homepage": "https://github.com/DrFairy/yii2-ARImages",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Alexey Belotserkovskiy",
+            "email": "creocoder@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "creocoder\\behaviors\\": ""
+        }
+    }
+}
