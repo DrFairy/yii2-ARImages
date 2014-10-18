@@ -38,9 +38,9 @@ Manual installation: [downloading the source in ZIP-format](https://github.com/D
 SETTINGS
 --------
 
-### Internal via AR Model class behavior settings ###
+### Internal settings (via AR Model class behavior set)  ###
 
-To setup ARImages behavior for an AR Model class you may (but not must) redefine your images location settings in AR Model class' ARImages behavior setting 'imagesRoot':
+To setup ARImages behavior for an AR Model class you may (but not must) redefine your images location settings in AR Model class' ARImages behavior setting 'imagesRoot' (the example is in USAGE department of this README):
 
 * Redefine `'APP_OWNER'` by your main application ID (the default value of `'APP_OWNER'` is 'basic'). Main one means the application in which you save image data of your AR Models. It's set in `config/main.php` (or in `config/web.php` in case of using base Yii2 app template):
 
