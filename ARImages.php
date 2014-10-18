@@ -1,6 +1,6 @@
 <?php
 /**
- * @link https://github.com/DrFairy/yii2-nested-set-behavior
+ * @link https://github.com/DrFairy/yii2-ARImages
  * @copyright Copyright (c) 2014 Alexey Belotserkovskiy
  * @license http://opensource.org/licenses/BSD-3-Clause
  */
