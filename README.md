@@ -40,7 +40,7 @@ SETTINGS
 
 ### Internal via AR Model class behavior settings ###
 
-To setup ARImages behavior for an AR Model class you may (not must) redefine your images location settings in AR Model class' ARImages behavior setting 'imagesRoot':
+To setup ARImages behavior for an AR Model class you may (but not must) redefine your images location settings in AR Model class' ARImages behavior setting 'imagesRoot':
 
 * Redefine `'APP_OWNER'` by your main application ID (the default value of `'APP_OWNER'` is 'basic'). Main one means the application in which you save image data of your AR Models. It's set in `config/main.php` (or in `config/web.php` in case of using base Yii2 app template):
 
@@ -57,7 +57,7 @@ To setup ARImages behavior for an AR Model class you may (not must) redefine you
 
 These settings are set for every AR Model class, so may be defined globally -- in a global app settings variable, and then just passed to all AR Model class ARImages behavior settings
 
-### External to the AR Model classes settings ###
+### Settings, external to the AR Model classes behavior set  ###
 
 * Set content directory alias for every application (if use advanced yii application template) in something like `<project Path>/<application ID>/config/aliases.php`. Or do it once in common config.
 
