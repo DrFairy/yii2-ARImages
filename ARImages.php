@@ -22,19 +22,6 @@ use yii\helpers\FileHelper;
  */
 class ARImages extends Behavior
 {
-    /**
-     * Application with images. Other applications use images via symlink assets
-     */
-    const APP_OWNER = 'app-api';
-    /**
-     * Directory with graphics and the name of alias for images path and url generation depending on application context
-     * @see afterInit()
-     */
-    const ROOT_ALIAS_NAME = 'content';
-    /**
-     * Images directory name
-     */
-    const IMAGES_FOLDER = 'images';
     const GENERATE_SUB_FOLDER_MODE = 0777;
 
     /**
@@ -56,6 +43,24 @@ class ARImages extends Behavior
         'mH' => 1600,
         'w' => false,
         'h' => false,
+    ];
+
+    /**
+     * @var array (
+     *  @element string 'APP_OWNER' Application with AR Model Class images.
+     *      Other applications use images via symlink assets
+     *
+     *  @element string 'ROOT_ALIAS_NAME' Directory with  AR Model Class images and the name of alias
+     *      for images path and url generation depending on application context
+     *      @see afterInit()
+     *
+     *  @element string 'IMAGES_FOLDER' AR Model Class images directory name
+     * ) - images location settings, set for every AR Model class, so may be passed to the global app settings
+     */
+    public $imgRoot = [
+        'APP_OWNER' => 'basic',
+        'ROOT_ALIAS_NAME' => 'content',
+        'IMAGES_FOLDER' => 'images',
     ];
 
     /**
@@ -152,14 +157,16 @@ class ARImages extends Behavior
         $t =& self::$pathTrees[get_class($this->owner)];
         if($t) return $t;
 
-        $imagesFolder = DIRECTORY_SEPARATOR . (self::IMAGES_FOLDER ? self::IMAGES_FOLDER . DIRECTORY_SEPARATOR : '');
+        $imagesFolder = DIRECTORY_SEPARATOR . ($this->imgRoot['IMAGES_FOLDER'] ?
+                $this->imgRoot['IMAGES_FOLDER'] . DIRECTORY_SEPARATOR : '');
 
-        $t['saveRoot'] = Yii::getAlias('@'. self::ROOT_ALIAS_NAME) . $imagesFolder;
+        $t['saveRoot'] = Yii::getAlias('@'. $this->imgRoot['ROOT_ALIAS_NAME']) . $imagesFolder;
         FileHelper::createDirectory($t['saveRoot'], self::GENERATE_SUB_FOLDER_MODE);
 
-        $t['showRoot'] = (Yii::$app->id == self::APP_OWNER ?
-                BaseUrl::base(true) . DIRECTORY_SEPARATOR . self::ROOT_ALIAS_NAME :
-                Yii::$app->assetManager->getPublishedUrl(Yii::getAlias('@' . self::ROOT_ALIAS_NAME))) . $imagesFolder;
+        $t['showRoot'] = (Yii::$app->id == $this->imgRoot['APP_OWNER'] ?
+                BaseUrl::base(true) . DIRECTORY_SEPARATOR . $this->imgRoot['ROOT_ALIAS_NAME'] :
+                Yii::$app->assetManager->getPublishedUrl(Yii::getAlias('@' . $this->imgRoot['ROOT_ALIAS_NAME'])))
+            . $imagesFolder;
 
         $modelFolder = get_class($this->owner);
         $modelFolder = substr($modelFolder, strripos($modelFolder, '\\') + 1) ;
@@ -169,7 +176,8 @@ class ARImages extends Behavior
             $img =& $t['pathTree'][$attribute];
             $img['attr'] = $iS['imageAttribute'];
             $img['dir'] = ((isset($iS['saveFolder']) && $iS['saveFolder']) ?
-                    $iS['saveFolder'] : $modelFolder . DIRECTORY_SEPARATOR . $iS['imageAttribute']) . DIRECTORY_SEPARATOR;
+                    $iS['saveFolder'] : $modelFolder . DIRECTORY_SEPARATOR . $iS['imageAttribute'])
+                . DIRECTORY_SEPARATOR;
 
             foreach ($iS['variants'] as $variant => $vS) {
                 $keyName = (isset($vS['name']) && $vS['name']) ? $vS['name'] : $variant;
@@ -202,7 +210,7 @@ class ARImages extends Behavior
         foreach ($t['pathTree'] as $attribute) {
             $showPath = $t['showRoot'] . $attribute['dir'];
             foreach ($attribute['variants'] as $variant) {
-                $this->imagesUrls[$attribute['attr'] . $variant['keyName']] = $this->owner->{$attribute['attr']} ?
+                $this->imagesUrls[strtolower($attribute['attr']) . $variant['keyName']] = $this->owner->{$attribute['attr']} ?
                     $showPath . $variant['dir'] . $this->owner->{$attribute['attr']} : null;
             }
         }
@@ -214,7 +222,8 @@ class ARImages extends Behavior
     public function beforeValidate()
     {
         foreach ($this->imagesSettings as $imageSettings) {
-            $this->owner->{$imageSettings['imageAttribute']} = UploadedFile::getInstance($this->owner, $imageSettings['imageAttribute']);
+            $this->owner->{$imageSettings['imageAttribute']} =
+                UploadedFile::getInstance($this->owner, $imageSettings['imageAttribute']);
         }
     }
 

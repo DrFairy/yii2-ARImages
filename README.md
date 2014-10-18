@@ -38,11 +38,11 @@ Manual installation: [downloading the source in ZIP-format](https://github.com/D
 SETTINGS
 --------
 
-### Internal ###
+### Internal via AR Model class behavior settings ###
 
-To setup ARImages behavior
+To setup ARImages behavior for an AR Model class you may (not must) redefine your images location settings in AR Model class' ARImages behavior setting 'imagesRoot':
 
-* First you set your main application ID to `APP_OWNER` constant in the ARImages class. Main one means the application in which you save image data of your AR Models. It's set in `config/main.php` (or in `config/web.php` in case of using base Yii2 app template):
+* Redefine `'APP_OWNER'` by your main application ID (the default value of `'APP_OWNER'` is 'basic'). Main one means the application in which you save image data of your AR Models. It's set in `config/main.php` (or in `config/web.php` in case of using base Yii2 app template):
 
 ```
 	...
@@ -52,10 +52,12 @@ To setup ARImages behavior
     ];
 ```
 
-- Set `ROOT_ALIAS_NAME` constant which is both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem.
-- Set `IMAGES_FOLDER` name.
+- Redefine `'ROOT_ALIAS_NAME'` which is both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem. Default value is 'content'.
+- Redefine `'IMAGES_FOLDER'` for images folder name. Default value is 'images'.
 
-### External ###
+These settings are set for every AR Model class, so may be defined globally -- in a global app settings variable, and then just passed to all AR Model class ARImages behavior settings
+
+### External to the AR Model classes settings ###
 
 * Set content directory alias for every application (if use advanced yii application template) in something like `<project Path>/<application ID>/config/aliases.php`. Or do it once in common config.
 
@@ -107,6 +109,11 @@ USAGE
     		return [
     			[
     			    'class' => ARImages,
+    			    'imagesRoot' => [
+    			        'APP_OWNER' => [string] '<application ID>',
+                        'ROOT_ALIAS_NAME' => [string] '<both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem>',
+                        'IMAGES_FOLDER' => [string] '<images folder name>',
+    			    ],
     				'imagesSettings' => [
                         [
                             'imageAttribute' => [string] '<attribute1 name>',
@@ -158,13 +165,13 @@ USAGE
 
 ```
 	<? if ($<model>-><attribute1 name>){ ?>
-    	<?= Html::img($model->imagesUrls['<attribute1 name>']) .
-    		Html::img($model->imagesUrls['<attribute1 name>Medium']) .
-    		Html::img($model->imagesUrls['<attribute1 name>2'])?>
+    	<?= Html::img($model->imagesUrls['<attribute1 name in lower case>']) .
+    		Html::img($model->imagesUrls['<attribute1 name in lower case>Medium']) .
+    		Html::img($model->imagesUrls['<attribute1 name in lower case>2'])?>
     <? } ?>
 
     <? if ($<model>-><attribute2 name>){ ?>
-        	<?= Html::img($model->imagesUrls['<attribute2 name>'])?>
+        	<?= Html::img($model->imagesUrls['<attribute2 name in lower case>'])?>
     <? } ?>
 ```
 
@@ -198,6 +205,8 @@ Displaying images in a View for the main example are shown above, so let's use a
 * `$model->imagesUrls['logoBig']` - is available if you have set variant name 'big' to AR model image attribute 'logo' in attached ARImages behavior. Optional variant setting 'saveFolder' doesn't change anything here and cases below.
 * `$model->imagesUrls['logo']` - is available as the first image variant url of AR model image attribute 'logo', declared in attached behavior settings. BUT IT'S ONLY AVAILABLE if this first attribute image variant has no name.
 * `$model->imagesUrls['logo2']` - is available as the third image variant url of AR model image attribute 'logo', declared in attached behavior settings. BUT IT'S ONLY AVAILABLE if there is three declared variants, and the third one has no name, else it’s the first name convention case.
+
+Note that the AR model image attribute name in images urls keys is transformed to lowercase for unique naming for different images attributes. For example, 'logo bIg' and 'logoB Ig' (will be 'logoBIg' and 'logobIg', not 'logoBIg' both).
 
 DON'T FORGET
 ------------
