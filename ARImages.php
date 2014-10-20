@@ -55,13 +55,20 @@ class ARImages extends Behavior
      *      @see afterInit()
      *
      *  @element string 'IMAGES_FOLDER' AR Model Class images directory name
-     * ) - images location settings, set for every AR Model class, so may be passed to the global app settings
+     * ) - default images location settings
      */
-    public $imgRoot = [
+    private static $imgRoot = [
         'APP_OWNER' => 'basic',
         'ROOT_ALIAS_NAME' => 'content',
         'IMAGES_FOLDER' => 'images',
     ];
+
+
+    /**
+     * @var array custom images location settings, set for every AR Model class, so may be passed to the global app settings
+     * @see $imgRoot
+     */
+    public $imagesRoot = [];
 
     /**
      * @var array (
@@ -157,15 +164,17 @@ class ARImages extends Behavior
         $t =& self::$pathTrees[get_class($this->owner)];
         if($t) return $t;
 
-        $imagesFolder = DIRECTORY_SEPARATOR . ($this->imgRoot['IMAGES_FOLDER'] ?
-                $this->imgRoot['IMAGES_FOLDER'] . DIRECTORY_SEPARATOR : '');
+        $this->$imagesRoot = $this->$imagesRoot ? array_merge(self::$imgRoot, $this->$imagesRoot) : self::$imgRoot;
 
-        $t['saveRoot'] = Yii::getAlias('@'. $this->imgRoot['ROOT_ALIAS_NAME']) . $imagesFolder;
+        $imagesFolder = DIRECTORY_SEPARATOR . ($this->$imagesRoot['IMAGES_FOLDER'] ?
+                $this->$imagesRoot['IMAGES_FOLDER'] . DIRECTORY_SEPARATOR : '');
+
+        $t['saveRoot'] = Yii::getAlias('@'. $this->$imagesRoot['ROOT_ALIAS_NAME']) . $imagesFolder;
         FileHelper::createDirectory($t['saveRoot'], self::GENERATE_SUB_FOLDER_MODE);
 
-        $t['showRoot'] = (Yii::$app->id == $this->imgRoot['APP_OWNER'] ?
-                BaseUrl::base(true) . DIRECTORY_SEPARATOR . $this->imgRoot['ROOT_ALIAS_NAME'] :
-                Yii::$app->assetManager->getPublishedUrl(Yii::getAlias('@' . $this->imgRoot['ROOT_ALIAS_NAME'])))
+        $t['showRoot'] = (Yii::$app->id == $this->$imagesRoot['APP_OWNER'] ?
+                BaseUrl::base(true) . DIRECTORY_SEPARATOR . $this->$imagesRoot['ROOT_ALIAS_NAME'] :
+                Yii::$app->assetManager->getPublishedUrl(Yii::getAlias('@' . $this->$imagesRoot['ROOT_ALIAS_NAME'])))
             . $imagesFolder;
 
         $modelFolder = get_class($this->owner);

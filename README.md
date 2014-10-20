@@ -30,7 +30,7 @@ Add the following to the repositories section of the same file:
 And run:
 
 ```
-	$ php composer.phar install
+	$ php composer.phar install drfairy/yii2-arimages
 ```
 
 Manual installation: [downloading the source in ZIP-format](https://github.com/DrFairy/yii2-ARImages/archive/master.zip).
@@ -40,7 +40,7 @@ SETTINGS
 
 ### Internal settings (via AR Model class behavior set)  ###
 
-To setup ARImages behavior for an AR Model class you may (but not must) redefine your images location settings in AR Model class' ARImages behavior setting 'imagesRoot' (the example is in USAGE department of this README):
+To setup ARImages behavior for an AR Model class you may (but not must) redefine your custom images location settings via AR Model class' ARImages behavior setting 'imagesRoot' (the example is in USAGE department of this README):
 
 * Redefine `'APP_OWNER'` by your main application ID (the default value of `'APP_OWNER'` is 'basic'). Main one means the application in which you save image data of your AR Models. It's set in `config/main.php` (or in `config/web.php` in case of using base Yii2 app template):
 
@@ -110,9 +110,9 @@ USAGE
     			[
     			    'class' => ARImages::className(),
     			    [optional] 'imagesRoot' => [
-    			        'APP_OWNER' => [string] '<application ID>',
-                        'ROOT_ALIAS_NAME' => [string] '<both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem>',
-                        'IMAGES_FOLDER' => [string] '<images folder name>',
+    			        [optional] 'APP_OWNER' => [string] '<application ID>',
+                        [optional] 'ROOT_ALIAS_NAME' => [string] '<both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem>',
+                        [optional] 'IMAGES_FOLDER' => [string] '<images folder name>',
     			    ],
     				'imagesSettings' => [
                         [
@@ -153,7 +153,7 @@ USAGE
     }
 ```
 
-* Create/Update. You may use native Yii2 ActiveForm and ActiveField to make the client part of file CU operations of CRUD. The client (View) part is the only one you set in this case. For the above example just add two standard file inputs in a View in the ActiveForm body:
+* Create/Update. You may use native Yii2 ActiveForm and ActiveField to make the client part of file CU operations of CRUD. The client (View) part is the only one you set in this case. For the example above just add two standard file inputs in a View in the ActiveForm body:
 
 ```
 	<?= $form->field($<model>, '<attribute1 name>')->fileInput() ?>
