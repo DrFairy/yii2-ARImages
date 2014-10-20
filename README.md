@@ -108,8 +108,8 @@ USAGE
     	public function behaviors(){
     		return [
     			[
-    			    'class' => ARImages,
-    			    'imagesRoot' => [
+    			    'class' => ARImages::className(),
+    			    [optional] 'imagesRoot' => [
     			        'APP_OWNER' => [string] '<application ID>',
                         'ROOT_ALIAS_NAME' => [string] '<both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem>',
                         'IMAGES_FOLDER' => [string] '<images folder name>',
