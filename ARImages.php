@@ -5,7 +5,7 @@
  * @license http://opensource.org/licenses/BSD-3-Clause
  */
 
-namespace DrFairy\behaviors;
+namespace drfairy\behaviors;
 
 use Yii;
 use yii\base\Behavior;
@@ -18,7 +18,7 @@ use yii\helpers\FileHelper;
 /**
  * Class ARImages
  * @author Alexey Belotserkovskiy <dr2fairy@gmail.com>
- * @package DrFairy\behaviors
+ * @package drfairy\behaviors
  */
 class ARImages extends Behavior
 {
