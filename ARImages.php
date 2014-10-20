@@ -164,17 +164,17 @@ class ARImages extends Behavior
         $t =& self::$pathTrees[get_class($this->owner)];
         if($t) return $t;
 
-        $this->$imagesRoot = $this->$imagesRoot ? array_merge(self::$imgRoot, $this->$imagesRoot) : self::$imgRoot;
+        $this->imagesRoot = $this->imagesRoot ? array_merge(self::$imgRoot, $this->imagesRoot) : self::$imgRoot;
 
-        $imagesFolder = DIRECTORY_SEPARATOR . ($this->$imagesRoot['IMAGES_FOLDER'] ?
-                $this->$imagesRoot['IMAGES_FOLDER'] . DIRECTORY_SEPARATOR : '');
+        $imagesFolder = DIRECTORY_SEPARATOR . ($this->imagesRoot['IMAGES_FOLDER'] ?
+                $this->imagesRoot['IMAGES_FOLDER'] . DIRECTORY_SEPARATOR : '');
 
-        $t['saveRoot'] = Yii::getAlias('@'. $this->$imagesRoot['ROOT_ALIAS_NAME']) . $imagesFolder;
+        $t['saveRoot'] = Yii::getAlias('@'. $this->imagesRoot['ROOT_ALIAS_NAME']) . $imagesFolder;
         FileHelper::createDirectory($t['saveRoot'], self::GENERATE_SUB_FOLDER_MODE);
 
-        $t['showRoot'] = (Yii::$app->id == $this->$imagesRoot['APP_OWNER'] ?
-                BaseUrl::base(true) . DIRECTORY_SEPARATOR . $this->$imagesRoot['ROOT_ALIAS_NAME'] :
-                Yii::$app->assetManager->getPublishedUrl(Yii::getAlias('@' . $this->$imagesRoot['ROOT_ALIAS_NAME'])))
+        $t['showRoot'] = (Yii::$app->id == $this->imagesRoot['APP_OWNER'] ?
+                BaseUrl::base(true) . DIRECTORY_SEPARATOR . $this->imagesRoot['ROOT_ALIAS_NAME'] :
+                Yii::$app->assetManager->getPublishedUrl(Yii::getAlias('@' . $this->imagesRoot['ROOT_ALIAS_NAME'])))
             . $imagesFolder;
 
         $modelFolder = get_class($this->owner);
