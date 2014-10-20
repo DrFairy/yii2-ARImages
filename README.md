@@ -101,7 +101,7 @@ USAGE
 * Set up the AR Class. Declare the **AR Images** behavior in the ActiveRecord class. The following example describes a case of two image attributes in AR model class, `'<attribute1 name>'` and `'<attribute2 name>'` . The first one have three variants. Management and displaying of this example are shown below. The code should look something like this:
 
 ```
-    use drfairy\yii2-arimages\ARImages
+    use DrFairy\behaviors\ARImages
 
     class <model> extends \yii\db\ActiveRecord {
     	...

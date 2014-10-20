@@ -5,7 +5,7 @@
  * @license http://opensource.org/licenses/BSD-3-Clause
  */
 
-namespace drfairy\behaviors;
+namespace DrFairy\behaviors;
 
 use Yii;
 use yii\base\Behavior;
