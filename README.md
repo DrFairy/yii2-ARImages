@@ -1,11 +1,11 @@
 AR Images
 ===========
 
-**AR Images** is a Behavior for the [Yii2 framework](http://www.yiiframework.com/) that manages images stored in ActiveRecord Models image attributes.
+**AR Images** is a behavior for the [Yii2 framework](http://www.yiiframework.com/) that manages images stored in ActiveRecord Models image attributes.
 
 You can set an arbitrary number of image variants (with different sizes and proportions) for an arbitrary number of AR image attributes.
 
-ARImages behavior works both in base and advanced yii application template and uses some yii extensions, for example Imagine.
+ARImages behavior works both in base and advanced yii application templates and uses some yii extensions, for example Imagine.
 
 Note: This behavior doesn't overwrite or broke native yii2 AR attributes validation (whether attribute, file, or image type validation), so you may use it freely regardless of behavior context.
 
@@ -40,7 +40,7 @@ SETTINGS
 
 ### Internal settings (via AR Model class behavior set)  ###
 
-To setup ARImages behavior for an AR Model class you may (but not must) redefine your custom images location settings via AR Model class' ARImages behavior setting 'imagesRoot' (the example is in USAGE department of this README):
+To setup ARImages behavior for an AR Model class you may (but not must) redefine your custom images location settings in the behavior declaration parameter 'imagesRoot' (the example is shown in the USAGE department of this README):
 
 * Redefine `'APP_OWNER'` by your main application ID (the default value of `'APP_OWNER'` is 'basic'). Main one means the application in which you save image data of your AR Models. It's set in `config/main.php` (or in `config/web.php` in case of using base Yii2 app template):
 
@@ -52,7 +52,7 @@ To setup ARImages behavior for an AR Model class you may (but not must) redefine
     ];
 ```
 
-- Redefine `'ROOT_ALIAS_NAME'` which is both content directory name in a web root of the main application and the name of an alias to the same directory in a filesystem. Default value is 'content'.
+- Redefine `'ROOT_ALIAS_NAME'` which is both content directory name in the web root of the main application and the name of the alias of the same directory in the filesystem. Default value is 'content'.
 - Redefine `'IMAGES_FOLDER'` for images folder name. Default value is 'images'.
 
 These settings are set for every AR Model class, so may be defined globally -- in a global app settings variable, and then just passed to all AR Model class ARImages behavior settings
@@ -65,7 +65,7 @@ These settings are set for every AR Model class, so may be defined globally -- i
 	<? Yii::setAlias('<ROOT_ALIAS_NAME>', '<content directory route>'); ?>
 ```
 
-* (no need of this in case of base yii application template) Set the asset for content directory link in every application, except the main one (it my be set for main too, but not used neither while saving images, nor showing images fool path).  You may set this once in common config.
+* (no need of this in case of base yii application template) Set the asset for content directory link in every application, except the main one (it may be set for main too, but not used neither while saving images, nor while showing images fool path).  You may set this once in common config.
 
 ```
 	<?php
@@ -98,7 +98,7 @@ These settings are set for every AR Model class, so may be defined globally -- i
 USAGE
 ------
 
-* Set up the AR Class. Declare the **AR Images** behavior in the ActiveRecord class. The following example describes a case of two image attributes in AR model class, `'<attribute1 name>'` and `'<attribute2 name>'` . The first one have three variants. Management and displaying of this example are shown below. The code should look something like this:
+* Set up the behavior in the AR Model class. Declare the **AR Images** behavior in the ActiveRecord class. The following example describes a case of two image attributes in AR model class, `'<attribute1 name>'` and `'<attribute2 name>'` . The first one have three variants. Management and displaying of this example are shown below. The code should look something like this:
 
 ```
     use DrFairy\behaviors\ARImages
@@ -153,7 +153,7 @@ USAGE
     }
 ```
 
-* Create/Update. You may use native Yii2 ActiveForm and ActiveField to make the client part of file CU operations of CRUD. The client (View) part is the only one you set in this case. For the example above just add two standard file inputs in a View in the ActiveForm body:
+* Create/Update. You may use native Yii2 ActiveForm and ActiveField to make the client part of file CU operations of CRUD. For the above example just add two standard file inputs in a View in the ActiveForm body:
 
 ```
 	<?= $form->field($<model>, '<attribute1 name>')->fileInput() ?>
@@ -180,7 +180,7 @@ NAMING CONVENTIONS BY EXAMPLES
 
 ### Images url scheme ###
 
-If behavior and it's environment setup succeeded, the global images path context (`<path to images>`) would look like this:
+If the behavior and it's environment setup succeeded, the global images path context (`<path to images>`) would look like this:
 
 * `<project Path>/<application ID>/web/<ROOT_ALIAS_NAME>/<IMAGES_FOLDER>` - in a filesystem
 * `/<ROOT_ALIAS_NAME>/<IMAGES_FOLDER>` - from the web in the main application

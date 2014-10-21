@@ -25,18 +25,18 @@ class ARImages extends Behavior
     const GENERATE_SUB_FOLDER_MODE = 0777;
 
     /**
-     * @var array of elements-singletons -- arrays of images and images variants paths for initialized AR model classes
+     * @var array of elements-singletons — arrays of images and images variants paths for initialized AR model classes
      * @see afterInit() - it is setting here
      */
     private static $pathTrees = [];
 
     /**
-     * @var array (
-     *  @element integer 'mW' max image width
-     *  @element integer 'mH' max image height
-     *  @element integer|bool 'w' fixed image width or false
-     *  @element integer|bool 'h' fixed image height or false
-     * ) - behavior's image settings preset
+     * @var array [
+     *     @element integer 'mW' max image width
+     *     @element integer 'mH' max image height
+     *     @element integer|bool 'w' fixed image width or false
+     *     @element integer|bool 'h' fixed image height or false
+     * ] behavior's image settings preset
      */
     private static $defaultImageSettings = [
         'mW' => 1600,
@@ -46,16 +46,14 @@ class ARImages extends Behavior
     ];
 
     /**
-     * @var array (
-     *  @element string 'APP_OWNER' Application with AR Model Class images.
-     *      Other applications use images via symlink assets
-     *
-     *  @element string 'ROOT_ALIAS_NAME' Directory with  AR Model Class images and the name of alias
-     *      for images path and url generation depending on application context
-     *      @see afterInit()
-     *
-     *  @element string 'IMAGES_FOLDER' AR Model Class images directory name
-     * ) - default images location settings
+     * @var array [
+     *     @element string 'APP_OWNER' Application with AR Model Class images.
+     *         Other applications use images via symlink assets
+     *     @element string 'ROOT_ALIAS_NAME' Directory with  AR Model Class images and the name of alias
+     *         for images path and url generation depending on application context
+     *         @see afterInit()
+     *     @element string 'IMAGES_FOLDER' AR Model Class images directory name
+     * ] default images location settings
      */
     private static $imgRoot = [
         'APP_OWNER' => 'basic',
@@ -71,18 +69,17 @@ class ARImages extends Behavior
     public $imagesRoot = [];
 
     /**
-     * @var array (
-     *  @element string 'saveFolder' optional image directory (otherwise it is generating by model/attribute context)
-     *  @element string 'imageAttribute' model images attribute name
-     *
-     *  @element array 'variants' (
-     *      @element string 'name' optional variant subDirectory (otherwise it is generating by variant key context)
-     *      @element integer 'mW' max image variant width
-     *      @element integer 'mH' max image variant height
-     *      @element integer|bool 'w' fixed image variant width or false
-     *      @element integer|bool 'h' fixed image variant height or false
-     *  ) image variants settings
-     * ) AR model class image attributes settings
+     * @var array [
+     *     @element string 'saveFolder' optional image directory (otherwise it is generating by model/attribute context)
+     *     @element string 'imageAttribute' model images attribute name
+     *     @element array 'variants' [
+     *         @element string 'name' optional variant subDirectory (otherwise it is generating by variant key context)
+     *         @element integer 'mW' max image variant width
+     *         @element integer 'mH' max image variant height
+     *         @element integer|bool 'w' fixed image variant width or false
+     *         @element integer|bool 'h' fixed image variant height or false
+     *     ] image variants settings
+     * ] AR model class image attributes settings
      * @see afterInit() - it is mainly used here
      */
     public $imagesSettings;
